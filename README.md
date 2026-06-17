@@ -75,6 +75,12 @@ supabase/
 - ✅ **Phase 1 — Foundation:** scaffold, deps, Supabase clients, magic-link auth
   + whitelist, full schema (RLS + realtime), brand system, global layout
   (top bar, sidebar, bottom nav).
-- ⏳ Phase 2 — daily-use screens (standup gate, board, quick capture).
-- ⏳ Phase 3 — client management. Phase 4 — strategic layer. Phase 5 — polish.
-  Phase 6 — deploy.
+- ✅ **Phase 2 — Daily-use screens:** Studio Pulse home with the mandatory
+  standup gate, Standup + history, pillar Kanban board (drag/filter/inline-add),
+  Quick Capture + inbox triage. Realtime + toasts throughout.
+- ✅ **Phase 3 — Client management:** clients list, detail with tabs
+  (Overview / Milestones / Communications / Tasks / Roadmap / Notes),
+  milestone management, communication logging, auto-calculated health (§8),
+  and the pipeline view with drag-reorder + convert-to-active.
+- ⏳ Phase 4 — strategic layer (roadmaps, objectives, decisions, wins).
+  Phase 5 — polish. Phase 6 — deploy.
