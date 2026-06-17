@@ -278,3 +278,26 @@ begin
     end;
   end loop;
 end $$;
+
+-- ----------------------------------------------------------------------------
+-- Role privileges (spec §4)
+--
+-- RLS (above) decides WHICH rows a founder can touch, but Postgres first
+-- checks table-level privileges for the connecting role. Without these grants
+-- every request fails with "permission denied for table ... (42501)" before
+-- RLS is ever evaluated. Safe: row access stays gated to the whitelist.
+-- ----------------------------------------------------------------------------
+
+grant usage on schema public to anon, authenticated;
+
+grant select, insert, update, delete on all tables in schema public to authenticated;
+grant select on all tables in schema public to anon;
+grant usage, select on all sequences in schema public to anon, authenticated;
+
+-- Same privileges for any table/sequence created later in this schema.
+alter default privileges in schema public
+  grant select, insert, update, delete on tables to authenticated;
+alter default privileges in schema public
+  grant select on tables to anon;
+alter default privileges in schema public
+  grant usage, select on sequences to anon, authenticated;
