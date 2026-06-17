@@ -44,16 +44,19 @@
   .nomad-light {
     --background: #f5f0e8;
     --foreground: #141414;
-    --card: #ffffff;
+    /* Cards sit a hair warmer/lighter than the page, not stark white —
+       softer, monochrome cream-on-cream, leaning on borders for definition. */
+    --card: #fbf7ef;
     --card-foreground: #141414;
-    --popover: #ffffff;
+    --popover: #fbf7ef;
     --popover-foreground: #141414;
-    --secondary: #f0f0f0;
+    --secondary: #ebe3d6;
     --secondary-foreground: #141414;
-    --muted: #f0f0f0;
-    --muted-foreground: #8a7f72;
-    --border: rgba(20, 20, 20, 0.12);
-    --input: rgba(20, 20, 20, 0.16);
+    --muted: #ebe3d6;
+    --muted-foreground: #6b6155;
+    /* Heavier edges so cards read clearly against the cream page. */
+    --border: rgba(20, 20, 20, 0.2);
+    --input: rgba(20, 20, 20, 0.24);
   }
 
   * {
@@ -157,10 +160,10 @@
     color: rgba(245, 240, 232, 0.25);
   }
   .nomad-light .text-hierarchy-secondary {
-    color: rgba(20, 20, 20, 0.45);
+    color: rgba(20, 20, 20, 0.6);
   }
   .nomad-light .text-hierarchy-muted {
-    color: rgba(20, 20, 20, 0.3);
+    color: rgba(20, 20, 20, 0.42);
   }
 
   /* Hide scrollbars for horizontal ribbons */
