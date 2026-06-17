@@ -89,7 +89,10 @@ supabase/
   Friday-4pm home banner + history; global keyboard shortcuts (`c` capture,
   `n` new task, `/` search, `g h/b/c/r/w` nav); mobile swipe on board cards
   (left = done, right = pull to today); toasts + empty states throughout.
-- ⏳ Phase 6 — deploy (Vercel + custom domain + production Supabase).
+- ✅ **Phase 6 — Deploy:** deployment guide in [`DEPLOY.md`](./DEPLOY.md)
+  (Vercel import, env vars, `hq.nomadengineers.io` domain, Supabase auth URLs,
+  migration + seed). The deploy itself runs from your Vercel/DNS/Supabase
+  dashboards.
 
 ## Keyboard shortcuts
 
