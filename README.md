@@ -82,5 +82,8 @@ supabase/
   (Overview / Milestones / Communications / Tasks / Roadmap / Notes),
   milestone management, communication logging, auto-calculated health (§8),
   and the pipeline view with drag-reorder + convert-to-active.
-- ⏳ Phase 4 — strategic layer (roadmaps, objectives, decisions, wins).
-  Phase 5 — polish. Phase 6 — deploy.
+- ✅ **Phase 4 — Strategic layer:** Studio Roadmap (annual objectives, horizon
+  rows, drag-between-quarter columns) + Client Roadmaps (per-client quarter
+  board), Decisions Log (search + filter), and the Wins Wall.
+- ⏳ Phase 5 — polish (weekly review, empty states, shortcuts, mobile gestures).
+  Phase 6 — deploy.
