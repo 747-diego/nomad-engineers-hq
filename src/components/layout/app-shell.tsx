@@ -3,6 +3,7 @@ import { TopBar } from "./top-bar";
 import { BottomNav } from "./bottom-nav";
 import { UserProvider } from "@/components/user-provider";
 import { QuickCaptureButton } from "@/components/quick-capture/quick-capture-button";
+import { KeyboardShortcuts } from "@/components/keyboard-shortcuts";
 
 // The persistent chrome wrapping every authenticated screen:
 // green top bar, desktop sidebar, sticky top bar, mobile bottom nav,
@@ -34,6 +35,7 @@ export function AppShell({
 
         <BottomNav />
         <QuickCaptureButton />
+        <KeyboardShortcuts />
       </div>
     </UserProvider>
   );

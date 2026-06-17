@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { Calendar } from "lucide-react";
 import type { Task } from "@/lib/types";
 import { formatShortDate } from "@/lib/dates";
@@ -23,19 +24,48 @@ export function TaskCard({
   onClick,
   onDragStart,
   draggable,
+  onSwipeLeft,
+  onSwipeRight,
 }: {
   task: Task;
   clientName?: string;
   onClick: () => void;
   onDragStart?: (e: React.DragEvent) => void;
   draggable?: boolean;
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
 }) {
+  const start = useRef<{ x: number; y: number } | null>(null);
+  const [dx, setDx] = useState(0);
+
+  function onTouchStart(e: React.TouchEvent) {
+    const t = e.touches[0];
+    start.current = { x: t.clientX, y: t.clientY };
+  }
+  function onTouchMove(e: React.TouchEvent) {
+    if (!start.current) return;
+    const t = e.touches[0];
+    const moveX = t.clientX - start.current.x;
+    const moveY = t.clientY - start.current.y;
+    if (Math.abs(moveX) > Math.abs(moveY)) setDx(moveX);
+  }
+  function onTouchEnd() {
+    if (dx <= -64) onSwipeLeft?.();
+    else if (dx >= 64) onSwipeRight?.();
+    setDx(0);
+    start.current = null;
+  }
+
   return (
     <div
       draggable={draggable}
       onDragStart={onDragStart}
       onClick={onClick}
-      className="group animate-fade-in cursor-pointer border border-border bg-background p-3 transition-colors hover:border-nomad-green"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+      style={{ transform: dx ? `translateX(${dx}px)` : undefined }}
+      className="group animate-fade-in cursor-pointer touch-pan-y border border-border bg-background p-3 transition-colors hover:border-nomad-green"
     >
       <div className="flex items-start gap-2">
         <span

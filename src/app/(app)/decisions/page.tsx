@@ -80,6 +80,7 @@ export default function DecisionsPage() {
               className="absolute left-3 top-1/2 -translate-y-1/2 text-nomad-muted-gray"
             />
             <Input
+              data-shortcut="search"
               className="pl-9"
               placeholder="Search decisions…"
               value={query}

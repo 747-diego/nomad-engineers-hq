@@ -85,5 +85,13 @@ supabase/
 - ✅ **Phase 4 — Strategic layer:** Studio Roadmap (annual objectives, horizon
   rows, drag-between-quarter columns) + Client Roadmaps (per-client quarter
   board), Decisions Log (search + filter), and the Wins Wall.
-- ⏳ Phase 5 — polish (weekly review, empty states, shortcuts, mobile gestures).
-  Phase 6 — deploy.
+- ✅ **Phase 5 — Polish:** Weekly Review (`/review`) with auto-pulled rollup +
+  Friday-4pm home banner + history; global keyboard shortcuts (`c` capture,
+  `n` new task, `/` search, `g h/b/c/r/w` nav); mobile swipe on board cards
+  (left = done, right = pull to today); toasts + empty states throughout.
+- ⏳ Phase 6 — deploy (Vercel + custom domain + production Supabase).
+
+## Keyboard shortcuts
+
+`c` quick capture · `n` new task · `/` focus search · `g` then `h` home
+(`b` board, `c` clients, `r` roadmap, `w` wins).

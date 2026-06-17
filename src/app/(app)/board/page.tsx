@@ -126,6 +126,10 @@ export default function BoardPage() {
               onCardClick={setEditing}
               onCardDragStart={setDragId}
               onAdd={(title) => createTask.mutate({ title, pillar })}
+              onSwipeLeft={(id) => updateTask.mutate({ id, patch: { status: "done" } })}
+              onSwipeRight={(id) =>
+                updateTask.mutate({ id, patch: { due_date: todayISO() } })
+              }
             />
           ))}
         </div>
@@ -153,6 +157,8 @@ function BoardColumn({
   onCardClick,
   onCardDragStart,
   onAdd,
+  onSwipeLeft,
+  onSwipeRight,
 }: {
   pillar: Pillar;
   tasks: Task[];
@@ -164,6 +170,8 @@ function BoardColumn({
   onCardClick: (t: Task) => void;
   onCardDragStart: (id: string) => void;
   onAdd: (title: string) => void;
+  onSwipeLeft: (id: string) => void;
+  onSwipeRight: (id: string) => void;
 }) {
   const meta = PILLAR_META[pillar];
   const [adding, setAdding] = useState(false);
@@ -236,6 +244,8 @@ function BoardColumn({
               draggable
               onDragStart={() => onCardDragStart(t.id)}
               onClick={() => onCardClick(t)}
+              onSwipeLeft={() => onSwipeLeft(t.id)}
+              onSwipeRight={() => onSwipeRight(t.id)}
             />
           ))
         )}

@@ -24,6 +24,20 @@ export function formatShortDate(iso: string): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
+// Monday of the current week, as YYYY-MM-DD. Weekly reviews key off this.
+export function weekStartISO(d = new Date()): string {
+  const date = new Date(d);
+  const day = date.getDay(); // 0=Sun..6=Sat
+  const diff = (day + 6) % 7; // days since Monday
+  date.setDate(date.getDate() - diff);
+  return toISODate(date);
+}
+
+// The weekly-review prompt opens Friday from 4pm onward (spec §5.11).
+export function isWeeklyReviewTime(d = new Date()): boolean {
+  return d.getDay() === 5 && d.getHours() >= 16;
+}
+
 export function formatLongDate(iso: string): string {
   const d = new Date(iso + (iso.length === 10 ? "T00:00:00" : ""));
   return d.toLocaleDateString("en-US", {

@@ -12,6 +12,7 @@ import { NorthStar } from "./north-star";
 import { TodaysWork } from "./todays-work";
 import { WinsRibbon } from "./wins-ribbon";
 import { ActivityFeed } from "./activity-feed";
+import { ReviewBanner } from "./review-banner";
 import { Wordmark } from "@/components/brand/wordmark";
 
 // Home / Studio Pulse. Order matters: intentions first, then everything else —
@@ -32,6 +33,7 @@ export function StudioPulse() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
+      <ReviewBanner />
       <IntentionsBlock standups={standups} />
 
       {gateOpen ? (
