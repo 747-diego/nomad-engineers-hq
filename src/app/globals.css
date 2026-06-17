@@ -171,4 +171,12 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Medium-priority dot: cream on dark, black on cream (spec §5.5 intent) */
+  .dot-medium {
+    background: #f5f0e8;
+  }
+  .nomad-light .dot-medium {
+    background: #141414;
+  }
 }
