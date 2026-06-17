@@ -11,6 +11,7 @@ import {
   useLogIntention,
   type StandupsByFounder,
 } from "@/hooks/use-standups";
+import { errorToMessage } from "@/lib/errors";
 import type { FounderKey } from "@/lib/types";
 
 const KEYS: FounderKey[] = ["diego", "saralexi"];
@@ -25,12 +26,18 @@ export function IntentionsBlock({ standups }: { standups: StandupsByFounder }) {
   const logIntention = useLogIntention();
   const toast = useToast();
   const [draft, setDraft] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   async function submit() {
     if (draft.trim().length < 10) return;
-    await logIntention.mutateAsync(draft);
-    setDraft("");
-    toast("Intention logged. The day is yours.");
+    setError(null);
+    try {
+      await logIntention.mutateAsync(draft);
+      setDraft("");
+      toast("Intention logged. The day is yours.");
+    } catch (e) {
+      setError(errorToMessage(e));
+    }
   }
 
   return (
@@ -88,6 +95,11 @@ export function IntentionsBlock({ standups }: { standups: StandupsByFounder }) {
                       {logIntention.isPending ? "Logging…" : "Log intention"}
                     </Button>
                   </div>
+                  {error && (
+                    <p className="mt-2 break-words font-mono text-[11px] leading-relaxed text-[#E06C5A]">
+                      {error}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <p className="font-mono text-sm text-hierarchy-muted">
