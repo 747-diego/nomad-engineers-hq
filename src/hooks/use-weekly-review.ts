@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useUser } from "@/components/user-provider";
 import { weekStartISO } from "@/lib/dates";
 import { FOUNDERS } from "@/lib/auth/whitelist";
+import { ensureUserRow, logActivity } from "@/lib/activity";
 import type { FounderKey } from "@/lib/types";
 
 const supabase = createClient();
@@ -76,6 +77,7 @@ export function useSubmitWeeklyReview() {
       next_week_focus: string;
     }) => {
       const weekStart = weekStartISO();
+      await ensureUserRow(supabase, user);
       const { error } = await supabase.from("weekly_reviews").upsert(
         {
           week_start: weekStart,
@@ -86,7 +88,7 @@ export function useSubmitWeeklyReview() {
         { onConflict: "week_start,user_id" },
       );
       if (error) throw error;
-      await supabase.from("activity_log").insert({
+      await logActivity(supabase, {
         user_id: user.id,
         action: "submitted the weekly review",
         entity_type: "weekly_review",

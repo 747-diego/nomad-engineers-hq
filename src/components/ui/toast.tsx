@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useCallback, useState } from "react";
+import { createContext, useContext, useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { setToastHandler } from "@/lib/toast-bus";
 
 type Toast = { id: number; message: string };
 type ToastContextValue = (message: string) => void;
@@ -19,6 +20,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       setToasts((t) => t.filter((x) => x.id !== id));
     }, 3000);
   }, []);
+
+  // Let non-React code (e.g. the mutation error handler) raise toasts.
+  useEffect(() => {
+    setToastHandler(toast);
+    return () => setToastHandler(null);
+  }, [toast]);
 
   return (
     <ToastContext.Provider value={toast}>

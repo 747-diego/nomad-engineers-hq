@@ -6,6 +6,7 @@ import { useUser } from "@/components/user-provider";
 import { useRealtime } from "./use-realtime";
 import { todayISO } from "@/lib/dates";
 import { FOUNDERS } from "@/lib/auth/whitelist";
+import { ensureUserRow, logActivity } from "@/lib/activity";
 import type { DailyStandup, FounderKey } from "@/lib/types";
 
 const supabase = createClient();
@@ -55,12 +56,14 @@ export function useLogIntention() {
   return useMutation({
     mutationFn: async (intention: string) => {
       const today = todayISO();
+      // Guarantee the FK target exists before inserting the standup.
+      await ensureUserRow(supabase, user);
       const { error } = await supabase.from("daily_standups").upsert(
         { user_id: user.id, date: today, intention: intention.trim() },
         { onConflict: "user_id,date" },
       );
       if (error) throw error;
-      await supabase.from("activity_log").insert({
+      await logActivity(supabase, {
         user_id: user.id,
         action: "logged today's intention",
         entity_type: "daily_standup",
