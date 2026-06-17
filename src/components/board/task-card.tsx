@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 const PRIORITY_DOT: Record<Task["priority"], string> = {
   low: "bg-nomad-muted-gray",
-  medium: "bg-nomad-cream",
+  medium: "dot-medium",
   high: "bg-nomad-green",
 };
 

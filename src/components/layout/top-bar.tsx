@@ -7,6 +7,7 @@ import { LogOut, ChevronDown } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { founderFor } from "@/lib/auth/whitelist";
 import { Wordmark } from "@/components/brand/wordmark";
+import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 
 function greeting() {
@@ -43,7 +44,8 @@ export function TopBar({ email }: { email: string | null }) {
       </Link>
       <div className="hidden md:block" />
 
-      <div className="relative flex items-center gap-3">
+      <div className="relative flex items-center gap-2">
+        <ThemeToggle />
         <span className="hidden font-mono text-xs text-hierarchy-secondary sm:inline">
           {greeting()}, {first}
         </span>
