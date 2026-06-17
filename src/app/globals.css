@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Nomad Engineers HQ — brand system
+  Fonts (Prompt 700/800, DM Mono 400/500) are loaded via next/font in layout.tsx
+  and exposed as --font-prompt / --font-dm-mono.
+*/
+
+@layer base {
+  :root {
+    /* Default theme = dark (Nomad Black). Light surfaces opt in via .nomad-light */
+    --background: #141414;
+    --foreground: #f5f0e8;
+
+    --card: #1a1a1a;
+    --card-foreground: #f5f0e8;
+
+    --popover: #1a1a1a;
+    --popover-foreground: #f5f0e8;
+
+    --primary: #27ae60;
+    --primary-foreground: #f5f0e8;
+
+    --secondary: #2b2b2b;
+    --secondary-foreground: #f5f0e8;
+
+    --muted: #2b2b2b;
+    --muted-foreground: #8a7f72;
+
+    --accent: #27ae60;
+    --accent-foreground: #f5f0e8;
+
+    --destructive: #b03a2e;
+    --destructive-foreground: #f5f0e8;
+
+    --border: rgba(245, 240, 232, 0.1);
+    --input: rgba(245, 240, 232, 0.14);
+    --ring: #27ae60;
+  }
+
+  /* Cream surface variant (proposals, light cards) */
+  .nomad-light {
+    --background: #f5f0e8;
+    --foreground: #141414;
+    --card: #ffffff;
+    --card-foreground: #141414;
+    --popover: #ffffff;
+    --popover-foreground: #141414;
+    --secondary: #f0f0f0;
+    --secondary-foreground: #141414;
+    --muted: #f0f0f0;
+    --muted-foreground: #8a7f72;
+    --border: rgba(20, 20, 20, 0.12);
+    --input: rgba(20, 20, 20, 0.16);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-dm-mono), ui-monospace, monospace;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-prompt), system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  /* No italics — not part of the brand voice */
+  i,
+  em {
+    font-style: normal;
+  }
+}
+
+@layer components {
+  /* The wordmark: "nomad" in fg, "engineers" always green, always lowercase */
+  .wordmark {
+    font-family: var(--font-prompt), system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+  }
+
+  /* 4px green top bar — required on every screen, full width, sharp edges */
+  .green-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #27ae60;
+    z-index: 100;
+    border-radius: 0;
+  }
+
+  /* Title pill — green bg, cream text, 4px radius */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    background: #27ae60;
+    color: #f5f0e8;
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: var(--font-dm-mono), ui-monospace, monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Mono label / eyebrow */
+  .label-mono {
+    font-family: var(--font-dm-mono), ui-monospace, monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+}
+
+@layer utilities {
+  /* Ghost "n." watermark — Prompt ExtraBold, 8–11% opacity on dark */
+  .watermark-n {
+    font-family: var(--font-prompt), system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: lowercase;
+    color: #27ae60;
+    opacity: 0.1;
+    letter-spacing: -0.06em;
+    user-select: none;
+    pointer-events: none;
+  }
+  .nomad-light .watermark-n {
+    opacity: 0.05;
+  }
+
+  .text-hierarchy-secondary {
+    color: rgba(245, 240, 232, 0.45);
+  }
+  .text-hierarchy-muted {
+    color: rgba(245, 240, 232, 0.25);
+  }
+  .nomad-light .text-hierarchy-secondary {
+    color: rgba(20, 20, 20, 0.45);
+  }
+  .nomad-light .text-hierarchy-muted {
+    color: rgba(20, 20, 20, 0.3);
+  }
+
+  /* Hide scrollbars for horizontal ribbons */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
